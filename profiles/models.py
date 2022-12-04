@@ -51,34 +51,14 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     points = models.IntegerField(default=0)
-    rank = models.IntegerField(default=0)
-    examNo = models.IntegerField(null=True, blank=True)
-    exam_yr = models.IntegerField(null=True, blank=True)
     image = models.ImageField(upload_to='images/profile_pics', null=True, blank=True, default="images/avatar.png", help_text=gtl('Choose your avatar'), verbose_name=gtl('Profile Picture'))
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name']
 
-    
-    
     def __str__(self):
         return self.user_name
 
     def get_absolute_url(self):
         return reverse("profiles:profile_detail", kwargs={'id':self.id})
-
-class UserFollowing(models.Model):
-    user_id = models.ForeignKey(UserProfile, related_name="following", on_delete=models.CASCADE)
-    following_user_id = models.ForeignKey(UserProfile, related_name="followers", on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, db_index=True)
-    
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['user_id','following_user_id'],  name="unique_followers")
-        ]
-
-        ordering = ["-created"]
-    
-    def __str__(self):
-        f"{self.user_id} follows {self.following_user_id}"

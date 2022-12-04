@@ -60,17 +60,16 @@ def profile_detail(request, pk):
     # questions = Questions.objects.filter(author=user.id)
     
     points = user.rank
-    rank = user.rank # karma - xp
     
-    context = {'user':user, 'points':points,'rank':rank} # , 'image_url':image_url
-    return render(request, 'profiles/student_detail.html', context)
+    
+    context = {'user':user, 'points':points,} # , 'image_url':image_url
+    return render(request, 'profiles/profile_detail.html', context)
 
 @login_required
 def edit_profile(request):
     user = get_object_or_404(UserProfile, pk=request.user.pk)
     
     points = user.rank
-    rank = user.rank # karma - xp
     
     if request.method == 'POST':
         user_form = UserEditForm(data=request.POST or None, instance=request.user)
@@ -83,7 +82,6 @@ def edit_profile(request):
     context = {
         'user':user, 
         'points':points,
-        'rank':rank,
         'user_form':user_form,
         }
     return render(request, 'profiles/edit_profile.html', context)
