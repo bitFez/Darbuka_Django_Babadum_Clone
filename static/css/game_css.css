@@ -1,0 +1,58 @@
+html, body {
+	/* Sets the height and width of the HTML page	 */
+    height: 100%;
+    width: 100%;
+}
+.container {  
+	/* Creates a grid of 4 for each image on the HTML page 
+		Created with https://grid.layoutit.com/ 
+	*/
+	display: grid;
+    grid-template-columns: 50% 50%; 
+    grid-template-rows: 50% 50%; 
+    grid-auto-columns: 50% 50%;
+    grid-auto-rows: 50% 50%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "one two"
+        "three four";
+    width: 100%;
+    height: 100%;
+}
+
+/* This section is the individual styling for each grid item */
+.one { 
+	grid-area: one;
+	background-color: red;
+}
+
+.two { 
+	grid-area: two; 
+}
+
+.three { 
+	grid-area: three;
+}
+
+.four { 
+	grid-area: four;
+	background-color: red;
+}
+
+.overlay {
+	/* This section styles the overlay for the scores	 
+		https://www.w3schools.com/howto/howto_css_overlay.asp
+	*/
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* shown by default */
+    width: 10%; 
+    height: 10%; 
+    top: 0;
+        /*   left: 0; */
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: None; /* Add a pointer on hover */
+}
