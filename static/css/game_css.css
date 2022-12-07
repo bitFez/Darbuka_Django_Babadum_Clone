@@ -6,11 +6,13 @@ html, body {
     height: 100%;
     width: 100%;
 }
-.container {  
+.boxes {  
 	/* Creates a grid of 4 for each image on the HTML page 
 		Created with https://grid.layoutit.com/ 
 	*/
 	display: grid;
+    top: 50%;
+    left: 50%;
     grid-template-columns: 50% 50%; 
     grid-template-rows: 50% 50%; 
     grid-auto-columns: 50% 50%;
@@ -22,6 +24,10 @@ html, body {
         "three four";
     width: 100%;
     height: 100%;
+}
+.box_cont {
+    top: 50%;
+    left: 50%;
 }
 
 /* This section is the individual styling for each grid item */
@@ -48,7 +54,7 @@ html, body {
 		https://www.w3schools.com/howto/howto_css_overlay.asp
 	*/
     position: absolute;
-    top: 80px;
+    top: 30px;
     right: 15px;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
@@ -75,7 +81,7 @@ html, body {
 
 .score_text{
     position: absolute;
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'Lalezar', cursive;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);

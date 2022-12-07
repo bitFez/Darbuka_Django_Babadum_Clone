@@ -5,11 +5,15 @@
 
 
 {% block content %}
-    <div class="container">
-    <div class="one"><img src="{% static '/images/media/' %}{{word1.image}}" alt=""></div>
-    <div class="two"><img src="{% static '/images/media/' %}{{word2.image}}" alt=""></div>
-    <div class="three"><img src="{% static '/images/media/' %}{{word3.image}}" alt=""></div>
-    <div class="four"><img src="{% static '/images/media/' %}{{word4.image}}" alt=""></div>
-    <div class="overlay score_text">Score: ##</div>
-    <div class="centre_text">{{clue}}</div>
+    <div class="boxes">
+    <div class="one box_cont"><img src="{% static '/images/media/' %}{{word1.image}}" alt=""></div>
+    <div class="two box_cont"><img src="{% static '/images/media/' %}{{word2.image}}" alt=""></div>
+    <div class="three box_cont"><img src="{% static '/images/media/' %}{{word3.image}}" alt=""></div>
+    <div class="four box_cont"><img src="{% static '/images/media/' %}{{word4.image}}" alt=""></div>
+    {% if user.is_authenticated %}
+        <div class="overlay score_text">
+            {{glo_score}} (<img src="{{flag}}" alt="">{{lan_score}} )
+        </div>
+    {% endif %}
+    <div class="centre_text">{{clue|title}}</div>
 {% endblock content %}

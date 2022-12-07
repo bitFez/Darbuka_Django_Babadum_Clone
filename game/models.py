@@ -1,4 +1,5 @@
 from django.db import models
+from profiles.models import UserProfile
 
 # Create your models here.
 class League(models.Model):
@@ -30,3 +31,11 @@ class Word(models.Model):
 
     def incorrectCount(self):
         self.incorrectAnswerCount +=1   
+
+class LanguageScore(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    language = models.ForeignKey(League,  on_delete=models.CASCADE)
+    points = models.PositiveBigIntegerField(default=0)
+
+    def __str__(self) -> str:
+        return super().__str__()
