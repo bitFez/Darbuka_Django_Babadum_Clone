@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+
+
 html, body {
 	/* Sets the height and width of the HTML page	 */
     height: 100%;
@@ -44,15 +47,44 @@ html, body {
 	/* This section styles the overlay for the scores	 
 		https://www.w3schools.com/howto/howto_css_overlay.asp
 	*/
-    position: fixed; /* Sit on top of the page content */
-    display: block; /* shown by default */
-    width: 10%; 
-    height: 10%; 
-    top: 0;
-        /*   left: 0; */
-    right: 0;
-    bottom: 0;
+    position: absolute;
+    top: 80px;
+    right: 15px;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: None; /* Add a pointer on hover */
+}
+
+.centre_text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 70px;
+    font-family: 'Lalezar', cursive;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.score_text{
+    position: absolute;
+    font-size: 50px;
+    font-family: 'Lalezar', cursive;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    /* -webkit-text-stroke: 1px black; */
+   color: black;
+   /* text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; */
 }

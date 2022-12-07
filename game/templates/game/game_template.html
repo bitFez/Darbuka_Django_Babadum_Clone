@@ -6,9 +6,10 @@
 
 {% block content %}
     <div class="container">
-    <div class="one">1</div>
-    <div class="two">2</div>
-    <div class="three">3</div>
-    <div class="four">4</div>
-    <div class="overlay">Score: ##</div>
+    <div class="one"><img src="{% static '/images/media/' %}{{word1.image}}" alt=""></div>
+    <div class="two"><img src="{% static '/images/media/' %}{{word2.image}}" alt=""></div>
+    <div class="three"><img src="{% static '/images/media/' %}{{word3.image}}" alt=""></div>
+    <div class="four"><img src="{% static '/images/media/' %}{{word4.image}}" alt=""></div>
+    <div class="overlay score_text">Score: ##</div>
+    <div class="centre_text">{{clue}}</div>
 {% endblock content %}
