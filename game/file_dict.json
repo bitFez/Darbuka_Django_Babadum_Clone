@@ -2898,9 +2898,9 @@
     {
         "code": "16256",
         "filename": "16256 downstairs.svg",
-        "us": "downstairs",
+        "us": "down",
         "uk": "",
-        "ar": "\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0633\u0641\u0644\u064a",
+        "ar": "أسفل",
         "tr": "A\u015fa\u011f\u0131da"
     },
     {
@@ -9450,7 +9450,7 @@
     {
         "code": "17095",
         "filename": "17095 crawling.svg",
-        "us": "crawling",
+        "us": "to crawl",
         "uk": "",
         "ar": "\ufed2\ufea3\ufeaf",
         "tr": "emekleme"
