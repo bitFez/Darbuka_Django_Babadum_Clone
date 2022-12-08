@@ -18,7 +18,7 @@ reshaper = arabic_reshaper.ArabicReshaper(configuration=ar_configuration)
 # Create your views here.
 def add_words(request):
     # Opening JSON file
-    with open(r'c:\Coding\Django_Babadum_Clone\game\file_dict.json', encoding="utf8") as f:
+    with open(r'game\file_dict.json', encoding="utf8") as f:
         data = json.load(f)
     
     lenofdata = len(data)
@@ -76,19 +76,20 @@ def play_us(request):
             user = request.user,
             language = League.objects.get(id=1)
         )
-        user_lan_points = user_lan.points
+    user_lan_points = user_lan
     if request.method == "POST":
-        if not instance.likes.filter(id=request.user.id).exists():
-            instance.likes.add(request.user)
-            instance.save() 
-            return render( request, 'posts/partials/likes_area.html', context={'post':instance})
-        else:    
-            id = League.objects.get(id=1)
-            word = Word.objects.all().filter(language=id).order_by('?')
-            rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
-            correct_word = rndw1
-            words_list = [rndw1,rndw2,rndw3,rndw4]
-            shuffle(words_list)
+        # if not instance.likes.filter(id=request.user.id).exists():
+        #     instance.likes.add(request.user)
+        #     instance.save() 
+        #     return render( request, 'posts/partials/likes_area.html', context={'post':instance})
+        pass
+    else:    
+        id = League.objects.get(id=1)
+        word = Word.objects.all().filter(language=id).order_by('?')
+        rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
+        correct_word = rndw1
+        words_list = [rndw1,rndw2,rndw3,rndw4]
+        shuffle(words_list)
 
     context ={
         "word1":words_list[0],

@@ -80,6 +80,7 @@ html, body {
 }
 
 .score_text{
+    right: 15px;
     position: absolute;
     font-size: 40px;
     font-family: 'Lalezar', cursive;
