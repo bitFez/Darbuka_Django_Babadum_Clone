@@ -76,7 +76,7 @@ def play_us(request):
             user = request.user,
             language = League.objects.get(id=1)
         )
-    user_lan_points = user_lan
+    user_lan_points = user_lan.points
     if request.method == "POST":
         # if not instance.likes.filter(id=request.user.id).exists():
         #     instance.likes.add(request.user)
@@ -98,8 +98,117 @@ def play_us(request):
         "word4":words_list[3],
         "clue":correct_word,
         "flag":"https://flagcdn.com/40x30/us.png",
-        "lan_score":user_lan_points, 
+        "lan_score":user_lan_points,
+        "language":user_lan, 
         "glo_score":user.points
     }
     
     return render(request, 'game/game_template.html', context)
+
+@login_required(login_url='/login/')
+def play_tr(request):
+    user = UserProfile.objects.get(id=request.user.id)
+    if LanguageScore.objects.filter(user=request.user, language=3).exists():
+        user_lan = LanguageScore.objects.get(user=request.user,language=3)
+    else:
+        user_lan = LanguageScore.objects.get_or_create(
+            user = request.user,
+            language = League.objects.get(id=3),
+            points = 0
+        )
+    user_lan_points = user_lan.points
+    if request.method == "POST":
+        # if not instance.likes.filter(id=request.user.id).exists():
+        #     instance.likes.add(request.user)
+        #     instance.save() 
+        #     return render( request, 'posts/partials/likes_area.html', context={'post':instance})
+        pass
+    else:    
+        id = League.objects.get(id=3)
+        word = Word.objects.all().filter(language=id).order_by('?')
+        rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
+        correct_word = rndw1
+        words_list = [rndw1,rndw2,rndw3,rndw4]
+        shuffle(words_list)
+
+    context ={
+        "word1":words_list[0],
+        "word2":words_list[1],
+        "word3":words_list[2],
+        "word4":words_list[3],
+        "clue":correct_word,
+        "flag":"https://flagcdn.com/40x30/tr.png",
+        "lan_score":user_lan_points, 
+        "language":user_lan.id,
+        "glo_score":user.points
+    }
+    
+    return render(request, 'game/game_template.html', context)
+
+@login_required(login_url='/login/')
+def play_ar(request):
+    user = UserProfile.objects.get(id=request.user.id)
+    if LanguageScore.objects.filter(user=request.user, language=4).exists():
+        user_lan = LanguageScore.objects.get(user=request.user, language=4)
+    else:
+        user_lan = LanguageScore.objects.get_or_create(
+            user = request.user,
+            language = League.objects.get(id=4),
+            points = 0
+        )
+    user_lan_points = user_lan.points
+    if request.method == "POST":
+        # if not instance.likes.filter(id=request.user.id).exists():
+        #     instance.likes.add(request.user)
+        #     instance.save() 
+        #     return render( request, 'posts/partials/likes_area.html', context={'post':instance})
+        pass
+    else:    
+        id = League.objects.get(id=4)
+        word = Word.objects.all().filter(language=id).order_by('?')
+        rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
+        correct_word = rndw1
+        words_list = [rndw1,rndw2,rndw3,rndw4]
+        shuffle(words_list)
+
+    context ={
+        "word1":words_list[0],
+        "word2":words_list[1],
+        "word3":words_list[2],
+        "word4":words_list[3],
+        "clue":correct_word,
+        "flag":"https://flagcdn.com/40x30/sa.png",
+        "lan_score":user_lan_points, 
+        "language":user_lan,
+        "glo_score":user.points
+    }
+    
+    return render(request, 'game/game_template.html', context)
+
+def check_answer(request):
+    
+    if request.method == "POST":
+        word = request.POST["word"]
+        clue = request.POST["clue"]
+        lang = request.POST["language"]
+        # print(lang)
+        user = request.user
+        lan = LanguageScore.objects.get(id=lang)
+        # print(f"lan... {lan}")
+        a = Word.objects.all().filter(word=word).first()
+        b = Word.objects.all().filter(word=clue).first()
+        # print(f"Word {a.word}, answer {b.word}")
+        if a.word == b.word:
+            print("Answer was correct")
+            user.points += 1
+            user.save()
+            lan.points += 1
+            lan.save()
+        else:
+            print("Answer not correct")
+            user.points -= 1
+            user.save()
+            lan.points -= 1
+            lan.save()
+    else:
+        print("Not post request")
