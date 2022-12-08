@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django_htmx.http import trigger_client_event
 from random import shuffle
 import json
 
@@ -99,7 +100,7 @@ def play_us(request):
         "clue":correct_word,
         "flag":"https://flagcdn.com/40x30/us.png",
         "lan_score":user_lan_points,
-        "language":user_lan, 
+        "language":user_lan.id,
         "glo_score":user.points
     }
     
@@ -179,7 +180,7 @@ def play_ar(request):
         "clue":correct_word,
         "flag":"https://flagcdn.com/40x30/sa.png",
         "lan_score":user_lan_points, 
-        "language":user_lan,
+        "language":user_lan.id,
         "glo_score":user.points
     }
     
@@ -191,6 +192,7 @@ def check_answer(request):
         word = request.POST["word"]
         clue = request.POST["clue"]
         lang = request.POST["language"]
+        flag = request.POST["flag"]
         # print(lang)
         user = request.user
         lan = LanguageScore.objects.get(id=lang)
@@ -204,11 +206,23 @@ def check_answer(request):
             user.save()
             lan.points += 1
             lan.save()
+            
         else:
             print("Answer not correct")
             user.points -= 1
             user.save()
             lan.points -= 1
             lan.save()
+        context = {
+            "lan_score":lan.points,
+            "glo_score":user.points,
+            "flag":flag,
+        }
+        render(request, 'game/partials/scoreboard.html', context)
+        # response = render('game/partials/scoreboard.html', context)
+        # return trigger_client_event(
+        #     response, 
+        # )
+        
     else:
         print("Not post request")

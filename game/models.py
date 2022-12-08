@@ -37,5 +37,5 @@ class LanguageScore(models.Model):
     language = models.ForeignKey(League,  on_delete=models.CASCADE)
     points = models.PositiveBigIntegerField(default=0)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return super().__str__()

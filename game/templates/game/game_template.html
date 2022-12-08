@@ -14,7 +14,8 @@
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word1.image}}" 
             id="{{word1}}"
             hx-post="{% url 'game:checka' %}"
-            hx-target="">
+            hx-target="#score_div"
+            hx-swap="innerHTML">
         </form>
     </div>
     <div class="two box_cont ">
@@ -24,7 +25,8 @@
             <input type="hidden" id="language" name="language" value="{{language}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word2.image}}" id="{{word2}}"
             hx-post="{% url 'game:checka' %}"
-            hx-target="">
+            hx-target="#score_div"
+            hx-swap="innerHTML">
         </form></div>
     <div class="three box_cont ">
         <form method="POST">
@@ -33,20 +35,23 @@
             <input type="hidden" id="language" name="language" value="{{language}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word3.image}}" id="{{word3}}"
             hx-post="{% url 'game:checka' %}"
-            hx-target="">
+            hx-target="#score_div"
+            hx-swap="innerHTML">
     </form></div>
     <div class="four box_cont ">
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word4}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
             <input type="hidden" id="language" name="language" value="{{language}}">
+            <input type="hidden" name="flag" value="{{flag}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word4.image}}" id="{{word4}}"
             hx-post="{% url 'game:checka' %}"
-            hx-target="">
+            hx-target="#score_div"
+            hx-swap="innerHTML">
         </form>
     </div>
     {% if user.is_authenticated %}
-        <div class="overlay score_text">
+        <div class="overlay score_text" id="score_div">
             <img src="https://img.icons8.com/color/48/null/globe--v1.png"/>
             {{glo_score}} (<img src="{{flag}}" alt="">{{lan_score}} )
         </div>
