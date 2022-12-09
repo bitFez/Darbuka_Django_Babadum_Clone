@@ -67,7 +67,7 @@ def add_words(request):
                 image = data[i]["filename"]
             )
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def play_us(request):
     user = UserProfile.objects.get(id=request.user.id)
     if LanguageScore.objects.filter(user=request.user).exists():
@@ -106,7 +106,7 @@ def play_us(request):
     
     return render(request, 'game/game_template.html', context)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def play_tr(request):
     user = UserProfile.objects.get(id=request.user.id)
     if LanguageScore.objects.filter(user=request.user, language=3).exists():
@@ -118,19 +118,12 @@ def play_tr(request):
             points = 0
         )
     user_lan_points = user_lan.points
-    if request.method == "POST":
-        # if not instance.likes.filter(id=request.user.id).exists():
-        #     instance.likes.add(request.user)
-        #     instance.save() 
-        #     return render( request, 'posts/partials/likes_area.html', context={'post':instance})
-        pass
-    else:    
-        id = League.objects.get(id=3)
-        word = Word.objects.all().filter(language=id).order_by('?')
-        rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
-        correct_word = rndw1
-        words_list = [rndw1,rndw2,rndw3,rndw4]
-        shuffle(words_list)
+    id = League.objects.get(id=3)
+    word = Word.objects.all().filter(language=id).order_by('?')
+    rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
+    correct_word = rndw1
+    words_list = [rndw1,rndw2,rndw3,rndw4]
+    shuffle(words_list)
 
     context ={
         "word1":words_list[0],
@@ -146,7 +139,7 @@ def play_tr(request):
     
     return render(request, 'game/game_template.html', context)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def play_ar(request):
     user = UserProfile.objects.get(id=request.user.id)
     if LanguageScore.objects.filter(user=request.user, language=4).exists():
@@ -158,19 +151,12 @@ def play_ar(request):
             points = 0
         )
     user_lan_points = user_lan.points
-    if request.method == "POST":
-        # if not instance.likes.filter(id=request.user.id).exists():
-        #     instance.likes.add(request.user)
-        #     instance.save() 
-        #     return render( request, 'posts/partials/likes_area.html', context={'post':instance})
-        pass
-    else:    
-        id = League.objects.get(id=4)
-        word = Word.objects.all().filter(language=id).order_by('?')
-        rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
-        correct_word = rndw1
-        words_list = [rndw1,rndw2,rndw3,rndw4]
-        shuffle(words_list)
+    id = League.objects.get(id=4)
+    word = Word.objects.all().filter(language=id).order_by('?')
+    rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
+    correct_word = rndw1
+    words_list = [rndw1,rndw2,rndw3,rndw4]
+    shuffle(words_list)
 
     context ={
         "word1":words_list[0],
@@ -189,14 +175,18 @@ def play_ar(request):
 def check_answer(request):
     
     if request.method == "POST":
+        # loads hidden fields from answer submissions
         word = request.POST["word"]
         clue = request.POST["clue"]
         lang = request.POST["language"]
         flag = request.POST["flag"]
-        # print(lang)
+        
+        # pulling up user score for language being tested 
         user = request.user
         lan = LanguageScore.objects.get(id=lang)
-        # print(f"lan... {lan}")
+        
+        # checks submitted answer against correct answer
+        # and updates score based on correctness
         a = Word.objects.all().filter(word=word).first()
         b = Word.objects.all().filter(word=clue).first()
         # print(f"Word {a.word}, answer {b.word}")
@@ -206,23 +196,34 @@ def check_answer(request):
             user.save()
             lan.points += 1
             lan.save()
-            
+            context = {
+                "lan_score":lan.points,
+                "glo_score":user.points,
+                "flag":flag,
+            }
+            response = render(request, 'game/partials/scoreboard.html', context)
+            return trigger_client_event(
+                response, 
+                'open-btn', context
+            )
         else:
             print("Answer not correct")
             user.points -= 1
             user.save()
             lan.points -= 1
             lan.save()
-        context = {
-            "lan_score":lan.points,
-            "glo_score":user.points,
-            "flag":flag,
-        }
-        render(request, 'game/partials/scoreboard.html', context)
-        # response = render('game/partials/scoreboard.html', context)
-        # return trigger_client_event(
-        #     response, 
-        # )
+            context = {
+                "lan_score":lan.points,
+                "glo_score":user.points,
+                "flag":flag,
+            }
+            # loads partial section on page for the score
+            # return render(request, 'game/partials/scoreboard.html', context)
+            response = render(request, 'game/partials/scoreboard.html', context)
+            return trigger_client_event(
+                response, 
+                'popup_window', context
+            ) 
         
     else:
         print("Not post request")

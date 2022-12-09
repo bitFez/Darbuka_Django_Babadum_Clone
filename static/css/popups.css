@@ -1,0 +1,35 @@
+.main-popup {
+	position: absolute;
+	left: 0;
+	height: 100vh;
+	width: 50%;
+	z-index: 1;
+	background: aqua;
+	padding: 30px 20px;
+	line-height: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translateX(-100%);
+}
+
+.popup-content p {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+@keyframes slide-in {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+@keyframes slide-out {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}

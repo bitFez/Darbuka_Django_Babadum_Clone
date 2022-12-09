@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/game_css.css' %}">{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/game_css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popups.css' %}">
+{% endblock %}
 
 
 {% block content %}
@@ -11,6 +14,7 @@
             <input type="hidden" id="word" name="word" value="{{word1}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
             <input type="hidden" id="language" name="language" value="{{language}}">
+            <input type="hidden" name="flag" value="{{flag}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word1.image}}" 
             id="{{word1}}"
             hx-post="{% url 'game:checka' %}"
@@ -23,6 +27,7 @@
             <input type="hidden" id="word" name="word" value="{{word2}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
             <input type="hidden" id="language" name="language" value="{{language}}">
+            <input type="hidden" name="flag" value="{{flag}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word2.image}}" id="{{word2}}"
             hx-post="{% url 'game:checka' %}"
             hx-target="#score_div"
@@ -32,6 +37,7 @@
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word3}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
+            <input type="hidden" name="flag" value="{{flag}}">
             <input type="hidden" id="language" name="language" value="{{language}}">
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word3.image}}" id="{{word3}}"
             hx-post="{% url 'game:checka' %}"
@@ -57,4 +63,16 @@
         </div>
     {% endif %}
     <div class="centre_text">{{clue|title}}</div>
+    
+    <!-- success / fail popup -->
+    <div class="main-popup" hx-trigger="open-btn">
+        <div class="popup-content">
+          <p>This is my popup</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laborum, magni nulla alias excepturi atque. Corporis quaerat impedit cupiditate exercitationem eos maxime numquam amet itaque animi! Maxime cupiditate, aliquid repellat, assumenda excepturi esse obcaecati alias consequatur quidem earum quae optio!</p>
+        </div>
+    </div>
 {% endblock content %}
+
+{% block js%}
+    <script src="{% static 'js/popup.js' %}"></script>
+{% endblock %}

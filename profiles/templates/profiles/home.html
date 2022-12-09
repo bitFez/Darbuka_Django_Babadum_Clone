@@ -1,4 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}{% endblock content %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/title_page.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div id="center">
+        <p class="mainH">Darbuka!</p>
+        <p>Language learning clone of babadum.com
+            
+        </p>
+        <p class="menuText">
+            <a href="{% url 'game:play_us' %}">US - </a> 
+            <a href="">UK -</a> 
+            <a href="{% url 'game:play_tr' %}">Turkish - </a>
+            <a href="{% url 'game:play_ar' %}">Arabic</a>
+        </p>
+    </div>
+
+{% endblock content %}
