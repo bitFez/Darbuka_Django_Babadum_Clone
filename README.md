@@ -4,7 +4,8 @@ A Babadum.com clone
 ## Credits
 Images forked from https://github.com/rpaaron/chinese_babadum_trainer but all credit/rights due to http://babadum.com
 Slide in pop ups - https://codepen.io/Web_Cifar/pen/qBEvGrZ?editors=1000
-
+Turkiye & US flag - by [Melvin ilham Oktaviansyah](https://freeicons.io/profile/8939)
+Palestine & UK flag by [Ahmad Smadi](https://freeicons.io/profile/203466?page=7)
 
 ## 🔧 Setup 🔧
 

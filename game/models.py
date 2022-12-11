@@ -13,7 +13,6 @@ class League(models.Model):
     def increase_q_count(self):
         self.questionCount +=1
         return self.questionCount
-    
 
 class Word(models.Model):
     language = models.ForeignKey(League, on_delete=models.CASCADE)
