@@ -80,7 +80,6 @@ def play_us(request):
         )
     user_lan_points = user_lan.points 
     id = League.objects.get(id=1)
-    print(id.flag)
     word = Word.objects.all().filter(language=id).order_by('?')
     rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
     correct_word = rndw1
@@ -112,9 +111,9 @@ def play_uk(request):
             language = League.objects.get(id=2),
             points = 0
         )
+        
     user_lan_points = user_lan.points 
     id = League.objects.get(id=2)
-    print(id.flag)
     word = Word.objects.all().filter(language=id).order_by('?')
     rndw1,rndw2,rndw3,rndw4 = word[0],word[1],word[2],word[3]
     correct_word = rndw1
