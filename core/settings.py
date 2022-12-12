@@ -30,11 +30,16 @@ INSTALLED_APPS = [
 
     # imported apps
     "django_htmx",
+    'crispy_forms',
+    "crispy_bootstrap5",
 
     # My apps
     'profiles',
     'game',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

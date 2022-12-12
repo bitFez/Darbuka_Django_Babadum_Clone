@@ -65,7 +65,31 @@ html, body {
     right: 10px;
     /* background-color: rgba(0,0,0,0.5); Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: None; /* Add a pointer on hover */
+    cursor: auto; /* Add a pointer on hover */
+}
+
+.language_overlay {
+	/* This section styles the overlay for the scores	 
+		https://www.w3schools.com/howto/howto_css_overlay.asp
+	*/
+    position:absolute; 
+    bottom: 30px;
+    right: 10px;
+    /* background-color: rgba(0,0,0,0.5); Black background with opacity */
+    z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: auto; /* Add a pointer on hover */
+}
+
+.menu_overlay {
+	/* This section styles the overlay for the scores	 
+		https://www.w3schools.com/howto/howto_css_overlay.asp
+	*/
+    position:absolute; 
+    bottom: 30px;
+    left: 10px;
+    /* background-color: rgba(0,0,0,0.5); Black background with opacity */
+    z-index: 4; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: auto; /* Add a pointer on hover */
 }
 
 .centre_text{

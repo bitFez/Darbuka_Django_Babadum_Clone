@@ -58,12 +58,43 @@
     </div>
     {% if user.is_authenticated %}
         <div class="overlay score_text" id="score_div">
-            <img src="https://img.icons8.com/color/48/null/globe--v1.png"/>
+            <img src="{% static 'images/globe.png' %}" width="55px"/>
             {{glo_score}} (<img src="{{flag}}" width="45px" alt="">{{lan_score}} )
         </div>
     {% endif %}
     <div class="centre_text">{{clue|title}}</div>
     
+    <div class="dropstart language_overlay">
+        <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" 
+            aria-expanded="false" >
+            <img src="{% static 'images/icons8-translate-96.png' %}" alt=""> 
+        </span>
+        <div >
+            <div class="dropdown-menu">
+              <a href="{% url 'game:play_uk' %}"><img src="{% static 'images/uk.svg' %}" width="55px"/></a> 
+              <a href="{% url 'game:play_us' %}"><img src="{% static 'images/us.svg' %}" width="55px"/></a>
+              <a href="{% url 'game:play_tr' %}"><img src="{% static 'images/tr.svg' %}" width="50px"/></a>
+              <a href="{% url 'game:play_ar' %}"><img src="{% static 'images/palestine.svg' %}" width="55px"/></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="dropend menu_overlay">
+        <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" 
+            aria-expanded="false" >
+            <img src="{% static 'images/circled-menu.png' %}" alt=""> 
+        </span>
+        <div >
+            <div class="dropdown-menu">
+              <a href="{% url 'profiles:home' %}"><img src="{% static 'images/icons8-home-page-64.png' %}" width="55px"/>Home</a> <br>
+              <a href=""><img src="{% static 'images/icons8-scoreboard-64.png' %}" width="55px"/>High Scores</a> <br>
+              <a href=""><img src="{% static 'images/icons8-area-chart-64.png' %}" width="50px"/>Statistics</a> <br>
+              <a href=""><img src="{% static 'images/icons8-autumn-64.png' %}" width="55px"/>Credits</a> <br>
+              <a href="{% url 'logout' %}"><img src="{% static 'images/icons8-sign-out-64.png' %}" width="55px"/>Log out</a>
+            </div>
+        </div>
+    </div>
+
     <!-- success / fail popup -->
     <div class="main-popup" hx-trigger="open-btn">
         <div class="popup-content">
