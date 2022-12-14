@@ -34,7 +34,7 @@ html, body {
 /* This section is the individual styling for each grid item */
 .one { 
 	grid-area: one;
-	background-color: red;
+	background-color: #DAF7A6;
 }
 
 .two { 
@@ -47,7 +47,7 @@ html, body {
 
 .four { 
 	grid-area: four;
-	background-color: red;
+	background-color: #CFCFCF;
 }
 
 .img_helper {

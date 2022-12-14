@@ -31,7 +31,7 @@ Before trying to run the server
 ## TODOs
 - [x] Create homepage
 - [x] Add language links to bottom right
-- [ ] colour background of cells a pastel colour
+- [x] colour background of cells a pastel colour
 - [ ] randomise colours with page reload
 - [x] Use HTMX to submit answers as clicks
 - [ ] auto load next question 2 seconds after answer is shown

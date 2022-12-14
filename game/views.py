@@ -103,7 +103,7 @@ def play_us(request):
 @login_required(login_url='/accounts/login/')
 def play_uk(request):
     user = UserProfile.objects.get(id=request.user.id)
-    if LanguageScore.objects.filter(user=request.user, language=1).exists():
+    if LanguageScore.objects.filter(user=request.user, language=2).exists():
         user_lan = LanguageScore.objects.get(user=request.user, language=2)
     else:
         user_lan = LanguageScore.objects.get_or_create(
