@@ -21,6 +21,7 @@ class Word(models.Model):
     image = models.CharField(max_length=200)
     correctAnswerCount = models.PositiveBigIntegerField(default=0)
     incorrectAnswerCount = models.PositiveBigIntegerField(default=0)
+    frequency = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
         return self.word

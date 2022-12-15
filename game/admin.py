@@ -14,7 +14,7 @@ class WordAdminConfig(admin.ModelAdmin):
     model = Word
     search_fields = ('id', 'language', 'word',)
     list_filter =('language',)
-    list_display = ('id', 'language','word',)
+    list_display = ('id', 'language','word','frequency',)
 
 class LanguageScoreAdmin(admin.ModelAdmin):
     model = LanguageScore

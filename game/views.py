@@ -215,6 +215,7 @@ def check_answer(request):
         # and updates score based on correctness
         a = Word.objects.all().filter(word=word).first()
         b = Word.objects.all().filter(word=clue).first()
+        b.frequency += 1
         # print(f"Word {a.word}, answer {b.word}")
         if a.word == b.word:
             print("Answer was correct")
@@ -222,6 +223,8 @@ def check_answer(request):
             user.save()
             lan.points += 1
             lan.save()
+            b.correctAnswerCount += 1
+            b.save()
             context = {
                 "lan_score":lan.points,
                 "glo_score":user.points,
@@ -238,6 +241,8 @@ def check_answer(request):
             user.save()
             lan.points -= 1
             lan.save()
+            b.incorrectAnswerCount += 1
+            b.save()
             context = {
                 "lan_score":lan.points,
                 "glo_score":user.points,
