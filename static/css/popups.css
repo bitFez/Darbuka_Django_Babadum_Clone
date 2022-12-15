@@ -1,16 +1,36 @@
-.main-popup {
+.incorrect-popup {
 	position: absolute;
 	left: 0;
-	height: 100vh;
+	height: 30vh;
 	width: 50%;
 	z-index: 1;
-	background: aqua;
+	background: LightCoral;
 	padding: 30px 20px;
 	line-height: 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	transform: translateX(-100%);
+}
+
+.correct-popup {
+	position: absolute;
+	top: 40%;
+	left: 0;
+	height: 30vh;
+	width: 50%;
+	z-index: 1;
+	/* background: aqua; */
+	padding: 30px 20px;
+	line-height: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translateX(-100%);
+}
+
+.main-popup-visible {
+	animation: slide-in 0.5s ease forwards;
 }
 
 .popup-content p {

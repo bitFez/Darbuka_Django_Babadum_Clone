@@ -19,7 +19,8 @@
             id="{{word1}}"
             hx-post="{% url 'game:checka' %}"
             hx-target="#score_div"
-            hx-swap="innerHTML">
+            hx-swap="innerHTML"
+            hx-swap-oob="true">
         </form>
     </div>
     <div class="two box_cont ">
@@ -31,7 +32,8 @@
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word2.image}}" id="{{word2}}"
             hx-post="{% url 'game:checka' %}"
             hx-target="#score_div"
-            hx-swap="innerHTML">
+            hx-swap="innerHTML"
+            hx-swap-oob="true">
         </form></div>
     <div class="three box_cont ">
         <form method="POST">
@@ -42,7 +44,8 @@
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word3.image}}" id="{{word3}}"
             hx-post="{% url 'game:checka' %}"
             hx-target="#score_div"
-            hx-swap="innerHTML">
+            hx-swap="innerHTML"
+            hx-swap-oob="true">
     </form></div>
     <div class="four box_cont ">
         <form method="POST">
@@ -53,15 +56,14 @@
             <img class="img_helper" src="{% static '/images/tiles/' %}{{word4.image}}" id="{{word4}}"
             hx-post="{% url 'game:checka' %}"
             hx-target="#score_div"
-            hx-swap="innerHTML">
+            hx-swap="innerHTML"
+            hx-swap-oob="true">
         </form>
     </div>
-    {% if user.is_authenticated %}
-        <div class="overlay score_text" id="score_div">
-            <img src="{% static 'images/globe.png' %}" width="55px"/>
-            {{glo_score}} (<img src="{{flag}}" width="45px" alt="">{{lan_score}} )
-        </div>
-    {% endif %}
+    <div class="overlay score_text" id="score_div">
+        <img src="{% static 'images/globe.png' %}" width="55px"/>
+        {{glo_score}} (<img src="{{flag}}" width="45px" alt="">{{lan_score}} )
+    </div>
     <div class="centre_text">{{clue|title}}</div>
     
     <div class="dropstart language_overlay">
@@ -96,10 +98,16 @@
     </div>
 
     <!-- success / fail popup -->
-    <div class="main-popup" hx-trigger="open-btn">
+    <div class="correct-popup">
         <div class="popup-content">
-          <p>This is my popup</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laborum, magni nulla alias excepturi atque. Corporis quaerat impedit cupiditate exercitationem eos maxime numquam amet itaque animi! Maxime cupiditate, aliquid repellat, assumenda excepturi esse obcaecati alias consequatur quidem earum quae optio!</p>
+          <img src="{% static 'images/arm.png' %}" alt="">
+          <p>CORRECT</p>
+        </div>
+    </div>
+    <div class="incorrect-popup">
+        <div class="popup-content">
+          <p>Wrong! <br> The correct answer was <b>{{clue}}</b>!</p>
+          
         </div>
     </div>
 {% endblock content %}

@@ -1,25 +1,25 @@
-const open_btn = document.querySelector('.open-btn');
-const close_btn = document.querySelector('.close-btn');
-const popup = document.querySelector('.popup');
-const main_popup = document.querySelector('.main-popup');
+var correct_popup;
+var incorrect_popup;
 
-open_btn.addEventListener('click', () => {
-	popup.style.display = 'flex';
-	main_popup.style.cssText = 'animation:slide-in .5s ease; animation-fill-mode: forwards;';
+window.addEventListener('load', () => {
+	correct_popup = document.querySelector('.correct-popup');
+	incorrect_popup = document.querySelector('.incorrect-popup');
 });
 
-close_btn.addEventListener('click', () => {
-	main_popup.style.cssText = 'animation:slide-out .5s ease; animation-fill-mode: forwards;';
+// Correct Answer:
+window.addEventListener('correct-answer', () => {
+	correct_popup.classList.add('main-popup-visible');
+
 	setTimeout(() => {
-		popup.style.display = 'none';
-	}, 500);
+		window.location.reload();
+	}, 1000);
 });
 
-window.addEventListener('click', (e) => {
-	if (e.target == document.querySelector('.popup-overlay')) {
-		main_popup.style.cssText = 'animation:slide-out .5s ease; animation-fill-mode: forwards;';
-		setTimeout(() => {
-			popup.style.display = 'none';
-		}, 500);
-	}
+// Incorrect Answer:
+window.addEventListener('incorrect-answer', () => {
+	incorrect_popup.classList.add('main-popup-visible');
+
+	setTimeout(() => {
+		window.location.reload();
+	}, 1000);
 });

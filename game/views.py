@@ -230,7 +230,7 @@ def check_answer(request):
             response = render(request, 'game/partials/scoreboard.html', context)
             return trigger_client_event(
                 response, 
-                'open-btn', context
+                'correct-answer', context
             )
         else:
             print("Answer not correct")
@@ -248,7 +248,7 @@ def check_answer(request):
             response = render(request, 'game/partials/scoreboard.html', context)
             return trigger_client_event(
                 response, 
-                'popup_window', context
+                'incorrect-answer', context
             ) 
         
     else:

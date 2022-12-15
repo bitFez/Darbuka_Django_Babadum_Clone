@@ -4333,7 +4333,7 @@
         "us": "hamster",
         "uk": "",
         "ar": "\ufeae\ufe98\ufeb4\ufee3\ufe8e\ufeec\ufedf\ufe8d",
-        "tr": "hamster"
+        "tr": "cırlak sıçan"
     },
     {
         "code": "16438",
@@ -4730,7 +4730,7 @@
     {
         "code": "16488",
         "filename": "16488 icecap.svg",
-        "us": "icecap",
+        "us": "ice cap",
         "uk": "",
         "ar": "\ufef1\ufeaa\ufef4\ufee0\ufea0\ufedf\ufe8d \ufe80\ufe8e\ufec4\ufed0\ufedf\ufe8d",
         "tr": "buz \u00f6rt\u00fcs\u00fc"
@@ -5037,7 +5037,7 @@
         "us": "keyboard",
         "uk": "",
         "ar": "\ufea2\ufef4\ufe97\ufe8e\ufed4\ufee4\ufedf\ufe8d \ufe94\ufea3\ufeee\ufedf",
-        "tr": "tu\u015f tak\u0131m\u0131"
+        "tr": "Klavye"
     },
     {
         "code": "16528",
@@ -5261,7 +5261,7 @@
         "us": "letters",
         "uk": "",
         "ar": "\ufed1\ufeed\ufeae\ufea3",
-        "tr": "edebiyat"
+        "tr": "alfabe"
     },
     {
         "code": "16557",
@@ -5453,7 +5453,7 @@
         "us": "log",
         "uk": "",
         "ar": "\ufede\ufea0\ufeb3",
-        "tr": "kay\u0131t"
+        "tr": "kütük"
     },
     {
         "code": "16582",
@@ -5893,7 +5893,7 @@
         "us": "mug",
         "uk": "",
         "ar": "\ufea1\ufeaa\ufed7",
-        "tr": "sald\u0131r\u0131p soymak"
+        "tr": "Bardak"
     },
     {
         "code": "16639",
@@ -6780,8 +6780,8 @@
         "filename": "16752 pipe.svg",
         "us": "pipe",
         "uk": "",
-        "ar": "\ufea6\ufec0\ufef3",
-        "tr": "boru"
+        "ar": "غليون",
+        "tr": "pipo"
     },
     {
         "code": "16753",
@@ -8218,10 +8218,10 @@
     {
         "code": "16936",
         "filename": "16936 sleit.svg",
-        "us": "sleit",
+        "us": "sleet",
         "uk": "",
         "ar": "\ufee1\ufe8e\ufee8\ufef3",
-        "tr": "yar\u0131k"
+        "tr": "sulu kar"
     },
     {
         "code": "16937",
@@ -8484,8 +8484,8 @@
         "filename": "16971 speaker.svg",
         "us": "speaker",
         "uk": "",
-        "ar": "\ufe95\ufeee\ufebc\ufedf\ufe8d \ufeae\ufe92\ufedc\ufee3",
-        "tr": "konu\u015fmac\u0131"
+        "ar": "مكبر الصوت",
+        "tr": "hopârlör"
     },
     {
         "code": "16972",
@@ -8530,10 +8530,10 @@
     {
         "code": "16977",
         "filename": "16977 spokes.svg",
-        "us": "spokes",
+        "us": "bike wheel",
         "uk": "",
-        "ar": "\ufe99\ufeaa\ufea4\ufe98\ufee4\ufedf\ufe8d",
-        "tr": "konu\u015fmac\u0131"
+        "ar": "عجلة الدراجة",
+        "tr": "bisiklet tekerleği"
     },
     {
         "code": "16978",
@@ -8693,7 +8693,7 @@
         "us": "stockings",
         "uk": "",
         "ar": "\ufe8f\ufead\ufe8d\ufeee\ufe9f",
-        "tr": "\u00e7orap"
+        "tr": "külotlu çorap"
     },
     {
         "code": "16999",
@@ -8771,7 +8771,7 @@
         "code": "17008",
         "filename": "17008 streetlamp.svg",
         "us": "streetlamp",
-        "uk": "sreet light",
+        "uk": "street light",
         "ar": "\ufec9\ufead\ufe8e\ufeb8\ufedf\ufe8d \ufea1\ufe8e\ufe92\ufebc\ufee3",
         "tr": "sokak lambas\u0131"
     },
@@ -10941,7 +10941,7 @@
         "us": "wheel",
         "uk": "",
         "ar": "\ufe94\ufee0\ufea0\ufecb",
-        "tr": "teker"
+        "tr": "tekerlek"
     },
     {
         "code": "17289",

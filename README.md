@@ -14,6 +14,7 @@ A Babadum.com clone
 - <a target="_blank" href="https://icons8.com/icon/YsISDBQ47eI0/scoreboard">Scoreboard</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 - <a target="_blank" href="https://icons8.com/icon/ScZWTm5akXlG/sign-out">Sign Out</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 - <a target="_blank" href="https://icons8.com/icon/TIcq6nNACnhE/autumn">Autumn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+- Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
 
 ## 🔧 Setup 🔧
 
@@ -34,7 +35,7 @@ Before trying to run the server
 - [x] colour background of cells a pastel colour
 - [ ] randomise colours with page reload
 - [x] Use HTMX to submit answers as clicks
-- [ ] auto load next question 2 seconds after answer is shown
+- [x] auto load next question 2 seconds after answer is shown
 - [ ] Animate number changes
 - [ ] Create stats page
 - [ ] Create high scores page
