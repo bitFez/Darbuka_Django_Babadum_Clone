@@ -95,7 +95,8 @@ def play_us(request):
         "flag":"/media/images/us.svg",
         "lan_score":user_lan_points,
         "language":user_lan.id,
-        "glo_score":user.points
+        "glo_score":user.points,
+        "correct_word_img":word[0].image
     }
     
     return render(request, 'game/game_template.html', context)
@@ -129,7 +130,8 @@ def play_uk(request):
         "flag":"/media/images/uk.svg",
         "lan_score":user_lan_points,
         "language":user_lan.id,
-        "glo_score":user.points
+        "glo_score":user.points,
+        "correct_word_img":word[0].image
     }
     
     return render(request, 'game/game_template.html', context)
@@ -162,7 +164,8 @@ def play_tr(request):
         "flag":"/media/images/tr.svg",
         "lan_score":user_lan_points, 
         "language":user_lan.id,
-        "glo_score":user.points
+        "glo_score":user.points,
+        "correct_word_img":word[0].image
     }
     
     return render(request, 'game/game_template.html', context)
@@ -195,7 +198,8 @@ def play_ar(request):
         "flag":"/media/images/palestine.svg",
         "lan_score":user_lan_points, 
         "language":user_lan.id,
-        "glo_score":user.points
+        "glo_score":user.points,
+        "correct_word_img":word[0].image
     }
     
     return render(request, 'game/game_template.html', context)
@@ -229,6 +233,7 @@ def check_answer(request):
                 "lan_score":lan.points,
                 "glo_score":user.points,
                 "flag":flag,
+
             }
             response = render(request, 'game/partials/scoreboard.html', context)
             return trigger_client_event(
@@ -246,7 +251,7 @@ def check_answer(request):
             context = {
                 "lan_score":lan.points,
                 "glo_score":user.points,
-                "flag":flag,
+                "flag":flag                
             }
             # loads partial section on page for the score
             # return render(request, 'game/partials/scoreboard.html', context)

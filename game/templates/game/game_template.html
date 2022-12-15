@@ -106,8 +106,9 @@
     </div>
     <div class="incorrect-popup">
         <div class="popup-content">
-          <p>Wrong! <br> The correct answer was <b>{{clue}}</b>!</p>
-          
+          <p>Wrong! <br> The correct answer was <b>{{clue}}</b>!
+          <img src="{% static '/images/tiles/' %}{{clue.image}}">
+        </p>
         </div>
     </div>
 {% endblock content %}

@@ -1,7 +1,7 @@
 .incorrect-popup {
 	position: absolute;
 	left: 0;
-	height: 30vh;
+	height: 40vh;
 	width: 50%;
 	z-index: 1;
 	background: LightCoral;
