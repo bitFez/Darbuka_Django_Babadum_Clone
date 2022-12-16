@@ -11,8 +11,9 @@ from bidi.algorithm import get_display
 @login_required(login_url='/accounts/login/')
 def play_us(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 2
     if LanguageScore.objects.filter(user=request.user, language=1).exists():
-        user_lan = LanguageScore.objects.get(user=request.user, language=1)
+        user_lan = LanguageScore.objects.get(user=request.user, language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -35,7 +36,7 @@ def play_us(request):
         "clue":correct_word,
         "flag":"/media/images/us.svg",
         "lan_score":user_lan_points,
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }
@@ -45,8 +46,9 @@ def play_us(request):
 @login_required(login_url='/accounts/login/')
 def play_uk(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 2
     if LanguageScore.objects.filter(user=request.user, language=2).exists():
-        user_lan = LanguageScore.objects.get(user=request.user, language=2)
+        user_lan = LanguageScore.objects.get(user=request.user, language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -70,7 +72,7 @@ def play_uk(request):
         "clue":correct_word,
         "flag":"/media/images/uk.svg",
         "lan_score":user_lan_points,
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }
@@ -80,8 +82,9 @@ def play_uk(request):
 @login_required(login_url='/accounts/login/')
 def play_tr(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 3
     if LanguageScore.objects.filter(user=request.user, language=3).exists():
-        user_lan = LanguageScore.objects.get(user=request.user,language=3)
+        user_lan = LanguageScore.objects.get(user=request.user,language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -104,7 +107,7 @@ def play_tr(request):
         "clue":correct_word,
         "flag":"/media/images/tr.svg",
         "lan_score":user_lan_points, 
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }
@@ -114,8 +117,9 @@ def play_tr(request):
 @login_required(login_url='/accounts/login/')
 def play_ar(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 4
     if LanguageScore.objects.filter(user=request.user, language=4).exists():
-        user_lan = LanguageScore.objects.get(user=request.user, language=4)
+        user_lan = LanguageScore.objects.get(user=request.user, language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -138,7 +142,7 @@ def play_ar(request):
         "clue":correct_word,
         "flag":"/media/images/palestine.svg",
         "lan_score":user_lan_points, 
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }
@@ -148,8 +152,9 @@ def play_ar(request):
 @login_required(login_url='/accounts/login/')
 def play_az(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 5
     if LanguageScore.objects.filter(user=request.user, language=5).exists():
-        user_lan = LanguageScore.objects.get(user=request.user,language=5)
+        user_lan = LanguageScore.objects.get(user=request.user,language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -172,7 +177,7 @@ def play_az(request):
         "clue":correct_word,
         "flag":"/media/images/az.svg",
         "lan_score":user_lan_points, 
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }
@@ -182,8 +187,9 @@ def play_az(request):
 @login_required(login_url='/accounts/login/')
 def play_ur(request):
     user = UserProfile.objects.get(id=request.user.id)
+    language = 6
     if LanguageScore.objects.filter(user=request.user, language=6).exists():
-        user_lan = LanguageScore.objects.get(user=request.user, language=6)
+        user_lan = LanguageScore.objects.get(user=request.user, language=language)
     else:
         user_lan = LanguageScore.objects.get_or_create(
             user = request.user,
@@ -206,7 +212,7 @@ def play_ur(request):
         "clue":correct_word,
         "flag":"/media/images/pk.svg",
         "lan_score":user_lan_points, 
-        "language":user_lan.id,
+        "language":language,
         "glo_score":user.points,
         "correct_word_img":word[0].image
     }

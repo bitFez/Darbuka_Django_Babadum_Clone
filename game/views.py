@@ -6,7 +6,7 @@ import json
 from . play_functions import *
 from .models import League, Word, LanguageScore
 from profiles.models import UserProfile
-
+from django.db.models import Sum
 import arabic_reshaper
 from bidi.algorithm import get_display
 ar_configuration = {
@@ -100,8 +100,8 @@ def check_answer(request):
         lan = LanguageScore.objects.get(id=lang)
         # checks submitted answer against correct answer
         # and updates score based on correctness
-        a = Word.objects.all().filter(word=word).first()
-        b = Word.objects.all().filter(word=clue).first()
+        a = Word.objects.all().filter(word=word, language=lang).first()
+        b = Word.objects.all().filter(word=clue, language=lang).first()
         b.frequency += 1
         # print(f"Word {a.word}, answer {b.word}")
         if a.word == b.word:
@@ -155,7 +155,27 @@ def high_scores(request):
     return render(request, 'game/high-scores.html', context)
 
 def word_stats(request):
-    words = Word.objects.all()
+    correct = Word.objects.aggregate(total = Sum('correctAnswerCount'))
+    incorrect = Word.objects.aggregate(total = Sum('incorrectAnswerCount'))
+    frequency = Word.objects.aggregate(total = Sum('frequency'))
+    corr_per = round(correct["total"] / frequency["total"] *100,2)
+    usEnglish = Word.objects.filter(language=1).aggregate(total= Sum('correctAnswerCount'))
+    usEnglishfre = Word.objects.filter(language=1).aggregate(total= Sum('frequency'))
+    usEngCorr = round(usEnglish["total"] / usEnglishfre["total"] *100,1)
 
-    context = {"words":words}
+    ukEnglish = Word.objects.filter(language=2).aggregate(total= Sum('correctAnswerCount'))
+    ukEnglishfre = Word.objects.filter(language=2).aggregate(total= Sum('frequency'))
+    ukEngCorr = round(ukEnglish["total"] / ukEnglishfre["total"] *100,1)
+
+    tr = Word.objects.filter(language=3).aggregate(total= Sum('correctAnswerCount'))
+    trfre = Word.objects.filter(language=3).aggregate(total= Sum('frequency'))
+    trCorr = round(tr["total"] / trfre["total"] *100,1)
+
+    context = {
+        "correct":correct, "corr_per":corr_per, "incorrect":incorrect,
+        "usEnglishAns":usEnglishfre, "usEngPer":usEngCorr, 
+        "ukEnglishAns":ukEnglishfre, "ukEngPer":ukEngCorr,
+        "trAns":trfre, "trCorr":trCorr,
+        
+                }
     return render(request, 'game/stats.html', context)

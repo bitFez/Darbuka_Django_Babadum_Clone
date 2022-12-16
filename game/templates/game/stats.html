@@ -10,13 +10,13 @@
     <h1>Statistics</h1>
 
     <h2>All Answers</h2>
-    👍 ## (xx %)
-    👎 ## 
+    <p>👍 {{correct.total}} ({{corr_per}} %)</p>
+    <p>👎 {{incorrect.total}} </p>
 
     <h2>Languages</h2>
-    {% for lan in langs %}
-    {{lan.name}} Total ## (👍 xx %)
-    {% endfor %}
+    <p>US ENGLISH: {{usEnglishAns.total}} (👍 {{usEngPer}} %)</p>
+    <p>UK ENGLISH: {{ukEnglishAns.total}} (👍 {{ukEngPer}} %)</p>
+    <p>TURKISH: {{trAns.total}} (👍 {{trCorr.total}} %)</p>
 
     <h2>Easiest Words</h2>
 

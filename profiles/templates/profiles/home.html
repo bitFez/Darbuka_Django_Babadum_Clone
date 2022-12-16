@@ -7,18 +7,21 @@
 
 {% block content %}
 
-    <div class="center_title">
+    <div class="center_title" style="text-align: center;">
         <p class="mainH">Darbuka!</p>
-        <p>Language learning clone of babadum.com
-            
-        </p>
-        <p class="menuText">
+       Language learning clone of babadum.com
+        <p class="menuText" style="text-align: center;">
             <a href="{% url 'game:play_us' %}">US - </a> 
             <a href="{% url 'game:play_uk' %}">UK -</a> 
             <a href="{% url 'game:play_tr' %}">Turkish - </a>
-            <a href="{% url 'game:play_ar' %}">Arabic</a>
-            <a href="{% url 'game:play_az' %}">Azeri</a>
+            <a href="{% url 'game:play_ar' %}">Arabic - </a>
+            <a href="{% url 'game:play_az' %}">Azeri - </a>
             <a href="{% url 'game:play_ur' %}">Urdu</a>
+        </p>
+        <p class="subMenuText" style="text-align: center;">
+            <a href="{% url 'game:high_scores' %}">High Scores - </a>
+            <a href="{% url 'game:word_stats' %}">Statistics - </a>
+            <a href="">Credits & About Us</a>
         </p>
     </div>
 
