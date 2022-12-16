@@ -91,8 +91,8 @@
         <div >
             <div class="dropdown-menu">
               <a href="{% url 'profiles:home' %}"><img src="{% static 'images/icons8-home-page-64.png' %}" width="55px"/>Home</a> <br>
-              <a href=""><img src="{% static 'images/icons8-scoreboard-64.png' %}" width="55px"/>High Scores</a> <br>
-              <a href=""><img src="{% static 'images/icons8-area-chart-64.png' %}" width="50px"/>Statistics</a> <br>
+              <a href="{% url 'game:high_scores' %}"><img src="{% static 'images/icons8-scoreboard-64.png' %}" width="55px"/>High Scores</a> <br>
+              <a href="{% url 'game:word_stats' %}"><img src="{% static 'images/icons8-area-chart-64.png' %}" width="50px"/>Statistics</a> <br>
               <a href=""><img src="{% static 'images/icons8-autumn-64.png' %}" width="55px"/>Credits</a> <br>
               <a href="{% url 'logout' %}"><img src="{% static 'images/icons8-sign-out-64.png' %}" width="55px"/>Log out</a>
             </div>

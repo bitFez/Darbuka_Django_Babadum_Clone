@@ -14,5 +14,7 @@ urlpatterns = [
     path('play/az', views.play_az, name="play_az"),
     #re_path(r'^play/check/(?P<word1>\w+)/(?P<clue>\w+)/$', views.check_answer, name="checka"),
     path('play/check', views.check_answer, name="checka"),
+    path('highscores', views.high_scores, name="high_scores"),
+    path('stats', views.word_stats, name="word_stats"),
     
 ]
