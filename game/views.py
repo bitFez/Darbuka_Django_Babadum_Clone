@@ -6,7 +6,7 @@ import json
 from . play_functions import *
 from .models import League, Word, LanguageScore
 from profiles.models import UserProfile
-from django.db.models import Sum
+from django.db.models import Sum, Count
 import arabic_reshaper
 from bidi.algorithm import get_display
 ar_configuration = {
@@ -154,11 +154,15 @@ def high_scores(request):
     context = {"langs":languages, "users":users}
     return render(request, 'game/high-scores.html', context)
 
+
+def get_average_correct(correct_count, frequency):
+    return round(correct_count["total"] / frequency["total"] *100,2)
+
 def word_stats(request):
     correct = Word.objects.aggregate(total = Sum('correctAnswerCount'))
     incorrect = Word.objects.aggregate(total = Sum('incorrectAnswerCount'))
     frequency = Word.objects.aggregate(total = Sum('frequency'))
-    corr_per = round(correct["total"] / frequency["total"] *100,2)
+    corr_per = get_average_correct(correct,frequency)#corr_per = round(correct["total"] / frequency["total"] *100,2)
     usEnglish = Word.objects.filter(language=1).aggregate(total= Sum('correctAnswerCount'))
     usEnglishfre = Word.objects.filter(language=1).aggregate(total= Sum('frequency'))
     usEngCorr = round(usEnglish["total"] / usEnglishfre["total"] *100,1)
@@ -171,11 +175,28 @@ def word_stats(request):
     trfre = Word.objects.filter(language=3).aggregate(total= Sum('frequency'))
     trCorr = round(tr["total"] / trfre["total"] *100,1)
 
+    ar = Word.objects.filter(language=4).aggregate(total= Sum('correctAnswerCount'))
+    arfre = Word.objects.filter(language=4).aggregate(total= Sum('frequency'))
+    arCorr = round(ar["total"] / arfre["total"] *100,1)
+
+    az = Word.objects.filter(language=5).aggregate(total= Sum('correctAnswerCount'))
+    azfre = Word.objects.filter(language=5).aggregate(total= Sum('frequency'))
+    azCorr = round(az["total"] / azfre["total"] *100,1)
+
+    ur = Word.objects.filter(language=6).aggregate(total= Sum('correctAnswerCount'))
+    urfre = Word.objects.filter(language=6).aggregate(total= Sum('frequency'))
+    urCorr = round(ur["total"] / urfre["total"] *100,1)
+
+    all_words_fre = Word.objects.annotate(id_count = Count('id')).order_by('id_count')[:5]
+    print(all_words_fre)
+
     context = {
         "correct":correct, "corr_per":corr_per, "incorrect":incorrect,
         "usEnglishAns":usEnglishfre, "usEngPer":usEngCorr, 
         "ukEnglishAns":ukEnglishfre, "ukEngPer":ukEngCorr,
         "trAns":trfre, "trCorr":trCorr,
-        
+        "arAns":arfre, "arCorr":arCorr,
+        "azAns":azfre, "azCorr":azCorr,
+        "urAns":urfre, "urCorr":urCorr,
                 }
     return render(request, 'game/stats.html', context)
