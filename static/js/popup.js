@@ -21,5 +21,5 @@ window.addEventListener('incorrect-answer', () => {
 
 	setTimeout(() => {
 		window.location.reload();
-	}, 1000);
+	}, 3000);
 });

@@ -21,6 +21,10 @@ for i in data:
         "filename": i["filename"],
         "us": i["us"],
         "uk": i["uk"],
+        "ar":i["ar"],
+        "tr":i["tr"],
+        "az":"",
+        "ur":""
     }
     d.append(dict)
 
