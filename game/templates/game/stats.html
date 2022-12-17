@@ -10,16 +10,61 @@
     <h1>Statistics</h1>
 
     <h2>All Answers</h2>
-    <p>👍 {{correct.total}} ({{corr_per}} %)</p>
-    <p>👎 {{incorrect.total}} </p>
+    <ul class="list-group list-group-horizontal-xxl">
+        <li class="list-group-item">
+            👍 {{correct.total}} ({{corr_per}} %)
+        </li>
+        <li class="list-group-item">
+            👎 {{incorrect.total}} 
+        </li>
+    </ul>
+  
 
     <h2>Languages</h2>
-    <p>US ENGLISH: {{usEnglishAns.total}} (👍 {{usEngPer}} %)</p>
-    <p>UK ENGLISH: {{ukEnglishAns.total}} (👍 {{ukEngPer}} %)</p>
-    <p>TURKISH: {{trAns.total}} (👍 {{trCorr}} %)</p>
-    <p>ARABIC: {{arAns.total}} (👍 {{arCorr}} %)</p>
-    <p>AZERI: {{azAns.total}} (👍 {{azCorr}} %)</p>
-    <p>URDU: {{urAns.total}} (👍 {{urCorr}} %)</p>
+    <ul class="list-group list-group-horizontal-xxl">
+        <li class="list-group-item">
+        <div class="col" style="width: {{usEnglishAns.total}}% "> 
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{usEngPer}}% " aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+            US ENGLISH: {{usEnglishAns.total}} (👍 {{usEngPer}} %)
+        </li>
+        <li class="list-group-item">
+            <div class="col" style="width: {{ukEnglishAns.total}}% ">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ukEngPer}}% " aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+            UK ENGLISH: {{ukEnglishAns.total}} (👍 {{ukEngPer}} %)
+        </li>
+        <li class="list-group-item">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{trCorr}}% " aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            TURKISH: {{trAns.total}} (👍 {{trCorr}} %)
+        </li>
+        <li class="list-group-item">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{arCorr}}%" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            ARABIC: {{arAns.total}} (👍 {{arCorr}} %)
+        </li>
+        <li class="list-group-item">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{azCorr}}%" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            AZERI: {{azAns.total}} (👍 {{azCorr}} %)
+        </li>
+        <li class="list-group-item">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{urCorr}}%" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            URDU: {{urAns.total}} (👍 {{urCorr}} %)
+        </li>
+      </ul>
+    
+  
     
     <h2>Easiest Words</h2>
     
