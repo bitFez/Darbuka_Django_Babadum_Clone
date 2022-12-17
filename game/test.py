@@ -4,7 +4,8 @@ from bidi.algorithm import get_display
 
 # Opening JSON file
 # r'C:\path\to\your\filename.ext'
-with open(r'c:\Coding\Django_Babadum_Clone\game\file_dict.json', encoding="utf8") as f:
+# r'c:\Coding\Django_Babadum_Clone\game\file_dict.json'
+with open('file_dict.json', encoding="utf8") as f:
     data = json.load(f) 
 
 def reshaped_text(x):
@@ -21,10 +22,10 @@ for i in data:
         "filename": i["filename"],
         "us": i["us"],
         "uk": i["uk"],
-        "ar":i["ar"],
+        "ar":reshaped_text(i["ar"]),
         "tr":i["tr"],
-        "az":"",
-        "ur":""
+        "az":i["az"],
+        "ur":reshaped_text(i["ur"])
     }
     d.append(dict)
 

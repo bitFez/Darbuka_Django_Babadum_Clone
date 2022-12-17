@@ -20,7 +20,8 @@ reshaper = arabic_reshaper.ArabicReshaper(configuration=ar_configuration)
 def add_words(request):
     # Opening JSON file
     # r'game\file_dict.json'
-    with open(r'c:\Coding\Django_Babadum_Clone\game\file_dict.json', encoding="utf8") as f:
+    # r'c:\Coding\Django_Babadum_Clone\game\file_dict.json'
+    with open(r'game\file_dict.json', encoding="utf8") as f:
         data = json.load(f)
     
     lenofdata = len(data)
@@ -97,15 +98,16 @@ def check_answer(request):
         flag = request.POST["flag"]
         # pulling up user score for language being tested 
         user = request.user
-        lan = LanguageScore.objects.get(id=lang)
+        language_id = League.objects.all().filter(language=lang).first()
+        lan = LanguageScore.objects.all().filter(language=language_id.id, user=user).first()
         # checks submitted answer against correct answer
         # and updates score based on correctness
-        a = Word.objects.all().filter(word=word, language=lang).first()
-        b = Word.objects.all().filter(word=clue, language=lang).first()
+        a = Word.objects.all().filter(word=word, language=language_id).first()
+        b = Word.objects.all().filter(word=clue, language=language_id).first()
         b.frequency += 1
         # print(f"Word {a.word}, answer {b.word}")
         if a.word == b.word:
-            print("Answer was correct")
+            #print("Answer was correct")
             user.points += 1
             user.save()
             lan.points += 1
@@ -124,11 +126,13 @@ def check_answer(request):
                 'correct-answer', context
             )
         else:
-            print("Answer not correct")
-            user.points -= 1
-            user.save()
-            lan.points -= 1
-            lan.save()
+            #print("Answer not correct")
+            if user.points > 0:
+                user.points -= 1
+                user.save()
+            if lan.points >0:
+                lan.points -= 1
+                lan.save()
             b.incorrectAnswerCount += 1
             b.save()
             context = {
@@ -156,36 +160,39 @@ def high_scores(request):
 
 
 def get_average_correct(correct_count, frequency):
-    return round(correct_count["total"] / frequency["total"] *100,2)
+    if frequency == 0:
+        return 0
+    else:
+        return round(correct_count / frequency *100,2)
 
 def word_stats(request):
     correct = Word.objects.aggregate(total = Sum('correctAnswerCount'))
     incorrect = Word.objects.aggregate(total = Sum('incorrectAnswerCount'))
     frequency = Word.objects.aggregate(total = Sum('frequency'))
-    corr_per = get_average_correct(correct,frequency)#corr_per = round(correct["total"] / frequency["total"] *100,2)
+    corr_per = get_average_correct(correct["total"],frequency["total"])#corr_per = round(correct["total"] / frequency["total"] *100,2)
     usEnglish = Word.objects.filter(language=1).aggregate(total= Sum('correctAnswerCount'))
     usEnglishfre = Word.objects.filter(language=1).aggregate(total= Sum('frequency'))
     usEngCorr = round(usEnglish["total"] / usEnglishfre["total"] *100,1)
 
     ukEnglish = Word.objects.filter(language=2).aggregate(total= Sum('correctAnswerCount'))
     ukEnglishfre = Word.objects.filter(language=2).aggregate(total= Sum('frequency'))
-    ukEngCorr = round(ukEnglish["total"] / ukEnglishfre["total"] *100,1)
+    ukEngCorr = round(get_average_correct(ukEnglish["total"], ukEnglishfre["total"]),2)
 
     tr = Word.objects.filter(language=3).aggregate(total= Sum('correctAnswerCount'))
     trfre = Word.objects.filter(language=3).aggregate(total= Sum('frequency'))
-    trCorr = round(tr["total"] / trfre["total"] *100,1)
+    trCorr = round(get_average_correct(tr["total"],trfre["total"]),2)
 
     ar = Word.objects.filter(language=4).aggregate(total= Sum('correctAnswerCount'))
     arfre = Word.objects.filter(language=4).aggregate(total= Sum('frequency'))
-    arCorr = round(ar["total"] / arfre["total"] *100,1)
+    arCorr = round(get_average_correct(ar["total"], arfre["total"]),2)
 
     az = Word.objects.filter(language=5).aggregate(total= Sum('correctAnswerCount'))
     azfre = Word.objects.filter(language=5).aggregate(total= Sum('frequency'))
-    azCorr = round(az["total"] / azfre["total"] *100,1)
+    azCorr = round(get_average_correct(az["total"], azfre["total"]),)
 
     ur = Word.objects.filter(language=6).aggregate(total= Sum('correctAnswerCount'))
     urfre = Word.objects.filter(language=6).aggregate(total= Sum('frequency'))
-    urCorr = round(ur["total"] / urfre["total"] *100,1)
+    urCorr = round(get_average_correct(ur["total"],urfre["total"]),)
 
     all_words_fre = Word.objects.annotate(id_count = Count('id')).order_by('id_count')[:5]
     print(all_words_fre)
