@@ -166,6 +166,7 @@ def get_average_correct(correct_count, frequency):
         return round(correct_count / frequency *100,2)
 
 def word_stats(request):
+    stats = []
     correct = Word.objects.aggregate(total = Sum('correctAnswerCount'))
     incorrect = Word.objects.aggregate(total = Sum('incorrectAnswerCount'))
     frequency = Word.objects.aggregate(total = Sum('frequency'))
@@ -194,16 +195,29 @@ def word_stats(request):
     urfre = Word.objects.filter(language=6).aggregate(total= Sum('frequency'))
     urCorr = round(get_average_correct(ur["total"],urfre["total"]),)
 
-    all_words_fre = Word.objects.annotate(id_count = Count('id')).order_by('id_count')[:5]
-    print(all_words_fre)
+    all_words_fre = Word.objects.order_by('-frequency')[:10]
+    #print(all_words_fre)
+    data = {
+        0:{"language":"Azeri","attempts":azfre, "correctAnswers":azCorr},
+        1:{"language":"US English","attempts":usEnglishfre, "correctAnswers":usEngCorr},
+        2:{"language":"UK English","attempts":ukEnglishfre, "correctAnswers":ukEngCorr},
+        3:{"language":"Turkish","attempts":trfre, "correctAnswers":trCorr},
+        4:{"language":"Arabic","attempts":arfre, "correctAnswers":arCorr},
+        5:{"language":"Urdu","attempts":urfre, "correctAnswers":urCorr}
+    }
+    res = sorted(data, key=lambda x: (data[x]['attempts']['total']), reverse=True)
+    stats = {}
+    
+    for r in range(0,len(res)):
+        dict1 = {r:{
+            "language":data[res[r]]["language"],
+            "attempts":data[res[r]]["attempts"]["total"],
+            "correctAnswers":data[res[r]]["correctAnswers"]
+            }}
+        stats.update(dict1)
 
     context = {
         "correct":correct, "corr_per":corr_per, "incorrect":incorrect,
-        "usEnglishAns":usEnglishfre, "usEngPer":usEngCorr, 
-        "ukEnglishAns":ukEnglishfre, "ukEngPer":ukEngCorr,
-        "trAns":trfre, "trCorr":trCorr,
-        "arAns":arfre, "arCorr":arCorr,
-        "azAns":azfre, "azCorr":azCorr,
-        "urAns":urfre, "urCorr":urCorr,
+        "stats":stats, "awf":all_words_fre,
                 }
     return render(request, 'game/stats.html', context)
