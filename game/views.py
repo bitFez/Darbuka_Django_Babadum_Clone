@@ -206,13 +206,15 @@ def word_stats(request):
         5:{"language":"Urdu","attempts":urfre, "correctAnswers":urCorr}
     }
     res = sorted(data, key=lambda x: (data[x]['attempts']['total']), reverse=True)
+    
     stats = {}
     
     for r in range(0,len(res)):
         dict1 = {r:{
             "language":data[res[r]]["language"],
             "attempts":data[res[r]]["attempts"]["total"],
-            "correctAnswers":data[res[r]]["correctAnswers"]
+            "correctAnswers":data[res[r]]["correctAnswers"],
+            "perOfTotalQs":(data[res[r]]["attempts"]["total"]/frequency['total'])*100,
             }}
         stats.update(dict1)
 

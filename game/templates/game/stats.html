@@ -25,7 +25,7 @@
         {% for d in stats.items %}
         <li class="list-group-item">
             
-                <div class="col" style="width: {{d.1.attempts}}% "> 
+                <div class="col" style="width: {{d.1.perOfTotalQs}}% "> 
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width:  {{d.1.correctAnswers}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -34,16 +34,16 @@
             <div class="row">
                 {{d.1.language}} - {{d.1.attempts}} (👍{{d.1.correctAnswers}}% )
             </div>                
-        </li>
-            
+        </li>  
         {% endfor %}
-      </ul>
+    </ul>
     
   
     
     <h2>Easiest Words</h2>
-    <div class="row-cols-2">
+    
         {% for word in awf.all %}
+        <div class="row-cols-2"></div>
             <div class="col">
                 <div class="col-3">
                     <img src="{% static '/images/tiles/' %}{{word.image}}" width="100%">
@@ -53,9 +53,9 @@
                     <p>👍 {{word.correctAnswerCount}}</p>
                 </div>
             </div>
-    
+        </div>
         {% endfor %}
-    </div>
+    
     <h2>Hardest Words</h2>
 
 
