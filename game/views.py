@@ -6,7 +6,7 @@ import json
 from . play_functions import *
 from .models import League, Word, LanguageScore
 from profiles.models import UserProfile
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, F, FloatField, ExpressionWrapper
 import arabic_reshaper
 from bidi.algorithm import get_display
 ar_configuration = {
@@ -170,56 +170,62 @@ def word_stats(request):
     correct = Word.objects.aggregate(total = Sum('correctAnswerCount'))
     incorrect = Word.objects.aggregate(total = Sum('incorrectAnswerCount'))
     frequency = Word.objects.aggregate(total = Sum('frequency'))
-    corr_per = get_average_correct(correct["total"],frequency["total"])#corr_per = round(correct["total"] / frequency["total"] *100,2)
-    usEnglish = Word.objects.filter(language=1).aggregate(total= Sum('correctAnswerCount'))
-    usEnglishfre = Word.objects.filter(language=1).aggregate(total= Sum('frequency'))
-    usEngCorr = round(usEnglish["total"] / usEnglishfre["total"] *100,1)
+    corr_per = get_average_correct(correct["total"],frequency["total"])
+    inCorr_perc = get_average_correct(incorrect["total"],frequency["total"])
+    usEnglish = Word.objects.filter(language=1).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    usEngCorr = round(usEnglish["total"] / usEnglish["frequency"] *100,1)
 
-    ukEnglish = Word.objects.filter(language=2).aggregate(total= Sum('correctAnswerCount'))
-    ukEnglishfre = Word.objects.filter(language=2).aggregate(total= Sum('frequency'))
-    ukEngCorr = round(get_average_correct(ukEnglish["total"], ukEnglishfre["total"]),2)
+    ukEnglish = Word.objects.filter(language=2).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    ukEngCorr = round(get_average_correct(ukEnglish["total"], ukEnglish["frequency"]),2)
 
-    tr = Word.objects.filter(language=3).aggregate(total= Sum('correctAnswerCount'))
-    trfre = Word.objects.filter(language=3).aggregate(total= Sum('frequency'))
-    trCorr = round(get_average_correct(tr["total"],trfre["total"]),2)
+    tr = Word.objects.filter(language=3).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    trCorr = round(get_average_correct(tr["total"],tr["frequency"]),2)
 
-    ar = Word.objects.filter(language=4).aggregate(total= Sum('correctAnswerCount'))
-    arfre = Word.objects.filter(language=4).aggregate(total= Sum('frequency'))
-    arCorr = round(get_average_correct(ar["total"], arfre["total"]),2)
+    ar = Word.objects.filter(language=4).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    arCorr = round(get_average_correct(ar["total"], ar["frequency"]),2)
 
-    az = Word.objects.filter(language=5).aggregate(total= Sum('correctAnswerCount'))
-    azfre = Word.objects.filter(language=5).aggregate(total= Sum('frequency'))
-    azCorr = round(get_average_correct(az["total"], azfre["total"]),)
+    az = Word.objects.filter(language=5).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    azCorr = round(get_average_correct(az["total"], az["frequency"]),)
 
-    ur = Word.objects.filter(language=6).aggregate(total= Sum('correctAnswerCount'))
-    urfre = Word.objects.filter(language=6).aggregate(total= Sum('frequency'))
-    urCorr = round(get_average_correct(ur["total"],urfre["total"]),)
+    ur = Word.objects.filter(language=6).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
+    urCorr = round(get_average_correct(ur["total"],ur["frequency"]),)
 
-    all_words_fre = Word.objects.order_by('-frequency')[:10]
+    # all_words_easiest = Word.objects.filter(frequency__gt=0).extra(
+    #     select={'easiest': "correctAnswerCount/frequency", 
+    #     "perc":"correctAnswerCount/frequency*100"}).order_by('easiest')[:10]
+    all_words_easiest = Word.objects.filter(frequency__gt=0).order_by("-correctAnswerCount").annotate(perc=Sum(F("correctAnswerCount")/F("frequency")*100))[:10]
+
+    # sorted_models = sorted(Word.objects.filter(frequency__gt=0),
+    #     key=lambda word:Word.correctAnswerCount/Word.frequency*100, reverse=True)[:10]
+    
+    # print(sorted_models)
+    all_words_hardest = Word.objects.filter(frequency__gt=0).order_by("correctAnswerCount").annotate(perc=Sum(F("correctAnswerCount")/F("frequency")*100))[:10]
+    
+    #all_words_hardest = Word.objects.filter(frequency__gt=0).extra(select={'hardest': "incorrectAnswerCount/frequency", "perc":"correctAnswerCount/frequency*100"}).order_by('-hardest')[:10]
     #print(all_words_fre)
     data = {
-        0:{"language":"Azeri","attempts":azfre, "correctAnswers":azCorr},
-        1:{"language":"US English","attempts":usEnglishfre, "correctAnswers":usEngCorr},
-        2:{"language":"UK English","attempts":ukEnglishfre, "correctAnswers":ukEngCorr},
-        3:{"language":"Turkish","attempts":trfre, "correctAnswers":trCorr},
-        4:{"language":"Arabic","attempts":arfre, "correctAnswers":arCorr},
-        5:{"language":"Urdu","attempts":urfre, "correctAnswers":urCorr}
+        0:{"language":"Azeri","attempts":az["frequency"], "correctAnswers":azCorr},
+        1:{"language":"US English","attempts":usEnglish["frequency"], "correctAnswers":usEngCorr},
+        2:{"language":"UK English","attempts":ukEnglish["frequency"], "correctAnswers":ukEngCorr},
+        3:{"language":"Turkish","attempts":tr["frequency"], "correctAnswers":trCorr},
+        4:{"language":"Arabic","attempts":ar["frequency"], "correctAnswers":arCorr},
+        5:{"language":"Urdu","attempts":ur["frequency"], "correctAnswers":urCorr}
     }
-    res = sorted(data, key=lambda x: (data[x]['attempts']['total']), reverse=True)
+    res = sorted(data, key=lambda x: (data[x]['attempts']), reverse=True)
     
     stats = {}
     
     for r in range(0,len(res)):
         dict1 = {r:{
             "language":data[res[r]]["language"],
-            "attempts":data[res[r]]["attempts"]["total"],
+            "attempts":data[res[r]]["attempts"],
             "correctAnswers":data[res[r]]["correctAnswers"],
-            "perOfTotalQs":(data[res[r]]["attempts"]["total"]/frequency['total'])*100,
+            "perOfTotalQs":((data[res[r]]["attempts"]/frequency['total'])*100),
             }}
         stats.update(dict1)
 
     context = {
-        "correct":correct, "corr_per":corr_per, "incorrect":incorrect,
-        "stats":stats, "awf":all_words_fre,
+        "correct":correct, "inCorr_perc":inCorr_perc,"corr_per":corr_per, "incorrect":incorrect,
+        "stats":stats, "awe":all_words_easiest,"awh":all_words_hardest,
                 }
     return render(request, 'game/stats.html', context)

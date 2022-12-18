@@ -15,7 +15,7 @@
             👍 {{correct.total}} ({{corr_per}} %)
         </li>
         <li class="list-group-item">
-            👎 {{incorrect.total}} 
+            👎 {{incorrect.total}} ({{inCorr_perc}} %)
         </li>
     </ul>
   
@@ -40,23 +40,37 @@
     
   
     
-    <h2>Easiest Words</h2>
     
-        {% for word in awf.all %}
-        <div class="row-cols-2"></div>
-            <div class="col">
-                <div class="col-3">
+    <div class="row">
+        <div class="col-6">
+            <h2>Easiest Words</h2>
+            {% for word in awe.all %}
+            <div class="row">
+                <div class="col-4">
                     <img src="{% static '/images/tiles/' %}{{word.image}}" width="100%">
                 </div>
-                <div class="col-9">
-                    <p>{{word.language|upper}} {{word.word}}</p>
-                    <p>👍 {{word.correctAnswerCount}}</p>
+                <div class="col-8">
+                    <p>{{word.language|upper}} {{word.word|title}}</p>
+                    <p>👍 {{word.perc}}% of {{word.frequency}} attempts</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    
-    <h2>Hardest Words</h2>
+        <div class="col-6">
+            <h2>Hardest Words</h2>
+            {% for word in awh.all %}
+            <div class="row">
+                <div class="col-4">
+                    <img src="{% static '/images/tiles/' %}{{word.image}}" width="100%">
+                </div>
+                <div class="col-8">
+                    <p>{{word.language|upper}} {{word.word|title}}</p>
+                    <p>👍 {{word.perc}}% of {{word.frequency}} attempts</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
 
 {% endblock content %}

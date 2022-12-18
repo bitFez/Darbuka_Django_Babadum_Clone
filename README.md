@@ -37,6 +37,6 @@ Before trying to run the server
 - [x] Use HTMX to submit answers as clicks
 - [x] auto load next question 2 seconds after answer is shown
 - [ ] Animate number changes
-- [ ] Create stats page
+- [X] Create stats page
 - [ ] Create high scores page
 - [ ] Create attribution page
