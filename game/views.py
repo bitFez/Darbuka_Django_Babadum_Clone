@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django_htmx.http import trigger_client_event
 from random import shuffle
 import json
+from django.core.paginator import Paginator
+
 from . play_functions import *
 from .models import League, Word, LanguageScore
 from profiles.models import UserProfile
@@ -153,10 +155,19 @@ def check_answer(request):
 
 def high_scores(request):
     users = UserProfile.objects.all()
+    paginator = Paginator(users, 10)
+    
+    page_number = request.GET.get('page')
+    user_scores = paginator.get_page(page_number)
 
     languages = LanguageScore.objects.all()
-    context = {"langs":languages, "users":users}
-    return render(request, 'game/high-scores.html', context)
+    context = {"langs":languages, "users":users, "user_scores":user_scores}
+
+    if request.htmx:
+        return render(request, "posts/partials/top10users.html", context)
+    else:
+        return render(request, 'game/high-scores.html', context)
+    
 
 
 def get_average_correct(correct_count, frequency):
@@ -190,19 +201,13 @@ def word_stats(request):
     ur = Word.objects.filter(language=6).aggregate(total= Sum('correctAnswerCount'), frequency= Sum('frequency'))
     urCorr = round(get_average_correct(ur["total"],ur["frequency"]),)
 
-    # all_words_easiest = Word.objects.filter(frequency__gt=0).extra(
-    #     select={'easiest': "correctAnswerCount/frequency", 
-    #     "perc":"correctAnswerCount/frequency*100"}).order_by('easiest')[:10]
+    
     all_words_easiest = Word.objects.filter(frequency__gt=0).order_by("-correctAnswerCount").annotate(perc=Sum(F("correctAnswerCount")/F("frequency")*100))[:10]
 
-    # sorted_models = sorted(Word.objects.filter(frequency__gt=0),
-    #     key=lambda word:Word.correctAnswerCount/Word.frequency*100, reverse=True)[:10]
     
-    # print(sorted_models)
-    all_words_hardest = Word.objects.filter(frequency__gt=0).order_by("correctAnswerCount").annotate(perc=Sum(F("correctAnswerCount")/F("frequency")*100))[:10]
+    all_words_hardest = Word.objects.filter(frequency__gt=0).annotate(perc=Sum(F("correctAnswerCount")/F("frequency")*100)).order_by("perc", )[:10]
     
-    #all_words_hardest = Word.objects.filter(frequency__gt=0).extra(select={'hardest': "incorrectAnswerCount/frequency", "perc":"correctAnswerCount/frequency*100"}).order_by('-hardest')[:10]
-    #print(all_words_fre)
+    
     data = {
         0:{"language":"Azeri","attempts":az["frequency"], "correctAnswers":azCorr},
         1:{"language":"US English","attempts":usEnglish["frequency"], "correctAnswers":usEngCorr},
