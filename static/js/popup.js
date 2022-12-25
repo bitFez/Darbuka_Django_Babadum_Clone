@@ -9,7 +9,6 @@ window.addEventListener('load', () => {
 // Correct Answer:
 window.addEventListener('correct-answer', () => {
 	correct_popup.classList.add('main-popup-visible');
-
 	setTimeout(() => {
 		window.location.reload();
 	}, 1000);
@@ -18,7 +17,6 @@ window.addEventListener('correct-answer', () => {
 // Incorrect Answer:
 window.addEventListener('incorrect-answer', () => {
 	incorrect_popup.classList.add('main-popup-visible');
-
 	setTimeout(() => {
 		window.location.reload();
 	}, 3000);

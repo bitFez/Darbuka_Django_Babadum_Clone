@@ -9,7 +9,7 @@
 
 {% block content %}
     <div class="boxes">
-    <div class="one box_cont ">
+    <div class="one box_cont " id="boxOne" style="background-color: beige;">
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word1}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
@@ -23,7 +23,7 @@
             hx-swap-oob="true">
         </form>
     </div>
-    <div class="two box_cont ">
+    <div class="two box_cont " id="boxTwo" style="background-color: beige;">
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word2}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
@@ -35,7 +35,7 @@
             hx-swap="innerHTML"
             hx-swap-oob="true">
         </form></div>
-    <div class="three box_cont ">
+    <div class="three box_cont " id="boxThree" style="background-color: beige;">
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word3}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
@@ -47,7 +47,7 @@
             hx-swap="innerHTML"
             hx-swap-oob="true">
     </form></div>
-    <div class="four box_cont ">
+    <div class="four box_cont " id="boxFour">
         <form method="POST">
             <input type="hidden" id="word" name="word" value="{{word4}}">
             <input type="hidden" id="clue" name="clue" value="{{clue}}">
@@ -117,4 +117,8 @@
 
 {% block js%}
     <script src="{% static 'js/popup.js' %}"></script>
+    <script src="{% static 'js/randomise_colours.js' %}"></script>
+    <script>
+        change_colours();
+    </script>
 {% endblock %}

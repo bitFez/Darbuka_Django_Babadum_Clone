@@ -153,14 +153,21 @@ def check_answer(request):
     else:
         print("Not post request")
 
+#
+# This function lists the high scores of all users
+#
 def high_scores(request):
+    # Loads user profiles from the database
     users = UserProfile.objects.all()
     paginator = Paginator(users, 10)
     
     page_number = request.GET.get('page')
     user_scores = paginator.get_page(page_number)
 
+    # loads all scores from the languages table
     languages = LanguageScore.objects.all()
+
+    # Passes the data to the front end
     context = {"langs":languages, "users":users, "user_scores":user_scores}
 
     if request.htmx:

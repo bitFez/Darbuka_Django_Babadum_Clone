@@ -33,10 +33,11 @@ Before trying to run the server
 - [x] Create homepage
 - [x] Add language links to bottom right
 - [x] colour background of cells a pastel colour
-- [ ] randomise colours with page reload
+- [x] randomise colours with page reload
 - [x] Use HTMX to submit answers as clicks
 - [x] auto load next question 2 seconds after answer is shown
 - [ ] Animate number changes
 - [X] Create stats page
-- [ ] Create high scores page
+- [x] Create high scores page
 - [ ] Create attribution page
+- [ ] Use gTTS to read each word!
