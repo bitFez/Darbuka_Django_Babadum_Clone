@@ -23,7 +23,7 @@
                 
             {% for user in user_scores %}
             <tr>
-                <th scope="row">#</th>
+                <th scope="row">{{forloop.counter}}</th>
                 <td><img src="" height=""> {{ user.user_name|capfirst }}</td>
                 <td>{{ user.points }}</td>
             </tr>  
