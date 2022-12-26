@@ -16,5 +16,5 @@ urlpatterns = [
     path('play/check', views.check_answer, name="checka"),
     path('highscores', views.high_scores, name="high_scores"),
     path('stats', views.word_stats, name="word_stats"),
-    
+    path('attribution', views.attribution_p, name="attribution"),    
 ]

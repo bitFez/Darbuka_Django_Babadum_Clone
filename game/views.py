@@ -241,3 +241,9 @@ def word_stats(request):
         "stats":stats, "awe":all_words_easiest,"awh":all_words_hardest,
                 }
     return render(request, 'game/stats.html', context)
+
+def attribution_p(request):
+
+    context = {}
+
+    return render(request, 'game/attr.html', context)

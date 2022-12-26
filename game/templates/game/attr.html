@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/title_page.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <h1><a href="{% url 'profiles:home' %}"><img src="{% static 'images/icons8-home-page-64.png' %}" width="55px"/></a> <br> Statistics</h1>
+
+    <h2>Attribution and Thanks</h2>
+    <p>First and foremost it is important to point out that currently all images are the creative works of 
+        <a href="http://hipopotamstudio.pl/">Hipopotam Studio</a> forked from the <a href="https://github.com/rpaaron/chinese_babadum_trainer">Chinese Babadum Trainer Github Repo</a>. 
+        I undertook this project as a fun undertaking with the view of creating a similar website with languages not as common.
+        <br>In time, I may aim to change all images and update the list of words to reflect what I believe are more relevant. 
+    </p>
+    <p>
+        Below are a list of other thanks and attributions that are due:
+    </p>
+    <ul>
+        <li>Slide in pop ups - https://codepen.io/Web_Cifar/pen/qBEvGrZ?editors=1000</li>
+        <li>Turkiye, Azarbayjan, Pakistan & US flag - by [Melvin ilham Oktaviansyah](https://freeicons.io/profile/8939)</li>
+        <li>Palestine & UK flag by [Ahmad Smadi](https://freeicons.io/profile/203466?page=7)</li>
+        <li><a target="_blank" href="https://icons8.com/icon/HbhxNiiI7KtP/translate">Translate</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/63766/globe">Globe</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/103661/circled-menu">Circled Menu</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/103798/home-page">Home Page</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/46351/area-chart">Area Chart</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/YsISDBQ47eI0/scoreboard">Scoreboard</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/ScZWTm5akXlG/sign-out">Sign Out</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li><a target="_blank" href="https://icons8.com/icon/TIcq6nNACnhE/autumn">Autumn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li>Correct Thumbs up arm illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></li>
+    </ul>
+
+{% endblock content %}
+
+{% block js%}{% endblock %}

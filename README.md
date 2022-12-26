@@ -39,5 +39,5 @@ Before trying to run the server
 - [ ] Animate number changes
 - [X] Create stats page
 - [x] Create high scores page
-- [ ] Create attribution page
+- [x] Create attribution page
 - [ ] Use gTTS to read each word!
