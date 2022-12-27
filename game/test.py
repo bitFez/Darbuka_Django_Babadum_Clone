@@ -17,6 +17,11 @@ def reshaped_text(x):
 
 d = []
 for i in data:
+    try:
+        i["ot"]
+        x = i["ot"]
+    except:
+        x = ""
     dict = {
         "code": i["code"],
         "filename": i["filename"],
@@ -25,7 +30,15 @@ for i in data:
         "ar":reshaped_text(i["ar"]),
         "tr":i["tr"],
         "az":i["az"],
-        "ur":reshaped_text(i["ur"])
+        "ur":reshaped_text(i["ur"]),
+        "ot":x,
+        "kt":"",
+        "kk":"",
+        "tk":"",
+        "tt":"",
+        "ky":"",
+        "uz":"",
+        "ug":""
     }
     d.append(dict)
 
