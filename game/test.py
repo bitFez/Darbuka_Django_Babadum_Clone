@@ -27,18 +27,18 @@ for i in data:
         "filename": i["filename"],
         "us": i["us"],
         "uk": i["uk"],
-        "ar":reshaped_text(i["ar"]),
-        "tr":i["tr"],
-        "az":i["az"],
-        "ur":reshaped_text(i["ur"]),
-        "ot":x,
-        "kt":"",
-        "kk":"",
-        "tk":"",
-        "tt":"",
-        "ky":"",
-        "uz":"",
-        "ug":""
+        "ar":reshaped_text(i["ar"]), # arabic
+        "tr":i["tr"], # turkce
+        "az":i["az"], # azeri
+        "ur":reshaped_text(i["ur"]), # urdu
+        "ot":x, # ottoman
+        "kt":"", # kibris turkcesi
+        "kk":"", # kazakh
+        "tk":"", # turkmen
+        "tt":"", # tatar
+        "ky":"", # kirghiz
+        "uz":"", # uzbek
+        "ug":"" # uyghur
     }
     d.append(dict)
 
