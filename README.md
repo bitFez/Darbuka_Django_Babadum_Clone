@@ -1,6 +1,11 @@
 # Darbuka 
 A Babadum.com clone
 
+<p>
+    <img src="Example_img1.png" width="45%" />
+    <img src="Example_img2.png" width="45%" />
+</p>
+
 ## Credits
 - Images forked from https://github.com/rpaaron/chinese_babadum_trainer but all credit/rights due to http://babadum.com
 - Slide in pop ups - https://codepen.io/Web_Cifar/pen/qBEvGrZ?editors=1000
@@ -15,6 +20,7 @@ A Babadum.com clone
 - <a target="_blank" href="https://icons8.com/icon/ScZWTm5akXlG/sign-out">Sign Out</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 - <a target="_blank" href="https://icons8.com/icon/TIcq6nNACnhE/autumn">Autumn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 - Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
+- Font by  <a href="https://fonts.google.com/specimen/Baloo+Bhaijaan+2?subset=arabic&noto.script=Arab">Google Fonts</a>
 
 ## 🔧 Setup 🔧
 
