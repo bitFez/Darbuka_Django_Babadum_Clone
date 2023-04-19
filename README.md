@@ -47,3 +47,4 @@ Before trying to run the server
 - [x] Create high scores page
 - [x] Create attribution page
 - [ ] Use gTTS to read each word!
+- [ ] Arabic/Urdu words are currently not loading with correct unicode format. Fonts not displaying in those languages.
